@@ -20,7 +20,7 @@ import (
 	"runtime"
 	"strings"
 
-	"corvus/soong/android"
+	"kang/soong/android"
 
 	"github.com/google/blueprint/proptools"
 )
@@ -134,8 +134,8 @@ type variableProperties struct {
 			Exclude_srcs []string `android:"arch_variant"`
 		} `android:"arch_variant"`
 
-		// include Corvus variables
-		Corvus android.Product_variables
+		// include kang variables
+		Kang android.Product_variables
 	} `android:"arch_variant"`
 }
 
@@ -342,8 +342,8 @@ type productVariables struct {
 
 	BoardUsesRecoveryAsBoot *bool `json:",omitempty"`
 
-	// include Corvus variables
-	Corvus android.ProductVariables
+	// include Kang variables
+	Kang android.ProductVariables
 }
 
 func boolPtr(v bool) *bool {
@@ -601,8 +601,8 @@ func createVariableProperties(moduleTypeProps []interface{}, productVariables in
 func createVariablePropertiesType(moduleTypeProps []interface{}, productVariables interface{}) reflect.Type {
 	typ, _ := proptools.FilterPropertyStruct(reflect.TypeOf(productVariables),
 		func(field reflect.StructField, prefix string) (bool, reflect.StructField) {
-			if strings.HasPrefix(prefix, "Product_variables.Corvus") {
-				// Convert Product_variables.Corvus.Foo to Corvus.Foo
+			if strings.HasPrefix(prefix, "Product_variables.Kang") {
+				// Convert Product_variables.Kang.Foo to Kang.Foo
 				_, prefix = splitPrefix(prefix)
 			}
 
